@@ -45,3 +45,9 @@ var nomes = []
 var senhas = []
 var nome = prompt("Digite seu nome: ")
 var senha = prompt("Digite sua senha: ")
+var opcao
+
+function EscolherOpcao(){
+    opcao = prompt("O que deseja fazer? 1 - Cadastrar / 2 - Login / 3 - Excluir Cadastro / 4 - Encerrar Programa")
+    return opcao
+}
