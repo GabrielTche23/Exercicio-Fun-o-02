@@ -43,11 +43,45 @@ console.log("Notas de 100 : ", nota100, "Notas de 50: ", nota50, "Notas de 10: "
 //1.3
 var nomes = []
 var senhas = []
-var nome = prompt("Digite seu nome: ")
-var senha = prompt("Digite sua senha: ")
-var opcao
+var opcao, contador = 0
+var continuar = true
+var cadastroValido = false;
+var nome,senha
+EscolherOpcao();
+OpcaoEscolhida();
 
-function EscolherOpcao(){
+function EscolherOpcao() {
     opcao = prompt("O que deseja fazer? 1 - Cadastrar / 2 - Login / 3 - Excluir Cadastro / 4 - Encerrar Programa")
+    nome = prompt("Digite seu nome: ")
+    senha = prompt("Digite sua senha: ")
     return opcao
+}
+
+function OpcaoEscolhida(name, password) {
+    while (continuar) {
+        if (opcao == 1) {
+            nomes[contador] = nome
+            senhas[contador] = senha
+            contador++
+            console.log(nomes)
+            console.log(senhas)
+        }
+        else if (opcao == 2) {
+            if (nomes[contador] == nomes[contador] && senhas[contador] == senhas[contador]) {
+                cadastroValido = true
+                console.log("Seu Login foi Feito com Sucesso.")
+                return cadastroValido
+            }
+            else {
+                cadastroValido = false
+                console.log("Login invalido por favor verifique seu nome e senha.")
+                return cadastroValido
+            }
+        }
+        else if(opcao == 4){
+            continuar = false;
+        }
+        EscolherOpcao();
+    }
+    
 }
