@@ -46,7 +46,10 @@ var senhas = []
 var opcao, contador = 0
 var continuar = true
 var cadastroValido = false;
-var nome,senha
+var nome, senha
+var nomesAux = []
+var senhasAux = []
+var nomeInvalido
 EscolherOpcao();
 OpcaoEscolhida();
 
@@ -68,20 +71,63 @@ function OpcaoEscolhida(name, password) {
         }
         else if (opcao == 2) {
             if (nomes[contador] == nomes[contador] && senhas[contador] == senhas[contador]) {
-                cadastroValido = true
                 console.log("Seu Login foi Feito com Sucesso.")
+                cadastroValido = true
                 return cadastroValido
             }
             else {
-                cadastroValido = false
                 console.log("Login invalido por favor verifique seu nome e senha.")
+                cadastroValido = false
                 return cadastroValido
             }
         }
-        else if(opcao == 4){
+        else if (opcao == 3) {
+            ExcluirCadastro();
+        }
+        else if (opcao == 4) {
             continuar = false;
+            return continuar
         }
         EscolherOpcao();
     }
-    
+
+}
+
+function ExcluirCadastro(name, password) {
+    nomeExcluir = prompt("Digite o nome que deseja excluir")
+    nomeInvalido = true
+    for (var index = 0; index < contador; index++) {
+        if (nomeExcluir == nomes[index]) {
+            nomes[index] = 0
+            senhas[index] = 0
+            nomeInvalido = false
+            console.log("Cadastro excluido com sucesso")
+        }
+    }
+    for (var atual = 0; atual < contador - 1; atual++) {
+        for (var seguinte = atual + 1; seguinte < contador; seguinte++) {
+            if (nomes[atual] == 0) {
+                nomes[atual] = nomes[seguinte]
+                senhas[atual] = senhas[seguinte]
+                nomes[seguinte] = 0
+                senhas[seguinte] = 0
+            }
+        }
+        for (var index = 0; index < contador; index++) {
+            if (nomes[index] != 0) {
+                nomesAux[index] = nomes[index]
+                senhasAux[index] = senhas[index]
+            }
+        }
+        if (nomeInvalido) {
+            console.log("Não achamos um cadastro com esse nome!")
+        }
+        nomes = nomesAux
+        senhas = senhasAux
+        nomesAux = []
+        senhasAux = []
+        contador--
+        console.log(nomes)
+        console.log(senhas)
+    }
 }
